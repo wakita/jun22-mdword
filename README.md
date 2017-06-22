@@ -11,41 +11,47 @@
 
 `pandoc` を中心に，メタデータや参照ドキュメント機構とかまで紹介します．標題の指定，目次，図表などの挿入，スタイル設定，時間があったら相互参照，数式の利用，文献リストの生成まで紹介しようと思います．
 
-Markdown，テキストエディタ
-
 ## 使用するソフトウェア
 
-- 必須なソフトウェア
+- テキストエディタ
 
-    - テキストエディタ
+- `pandoc`: 汎用Markdownプロセッサ．htmlはもちろん，docx, epub, LaTeX, man, PDF, wiki, 各種Markdown方言，各種スライドショーなどを出力できます．(`brew install pandoc`)
 
-    - `pandoc`: 汎用Markdownプロセッサ．htmlはもちろん，docx, epub, LaTeX, man, PDF, wiki, 各種Markdown方言，各種スライドショーなどを出力できます．(`brew install pandoc`)
+- Microsoft Word: できあがった Word 文書を閲覧するため．スタイリングにも使います．
 
-    - Microsoft Word: できあがった Word 文書を閲覧するため．スタイリングにも使います．
+- Markdown のサポートツール: 手元で編集したMarkdownの様子を眺められるツールがあると嬉しいかも．
 
-- あると便利なソフトウェア
+- `sed`: UNIX標準の正規表現の変換ツール
 
-    - Markdown のサポートツール: 手元で編集したMarkdownの様子を眺められるツールがあると嬉しいかも．
+- `pandoc` 用の拡張ツール
 
-    - `sed`: UNIX標準の正規表現の変換ツール
+    - `pandoc-crossref`: 相互参照のため図表，数式などに番号づけをする
 
-    - `pandoc` 用の拡張ツール
+    - `pandoc-citeproc`: 文献リストを挿入する
 
-        - `pandoc-crossref`: 相互参照のため図表，数式などに番号づけをする
+    - 拡張ツールのインストール方法
 
-        - `pandoc-citeproc`: 文献リストを挿入する
+        pandoc とここで紹介する拡張ツールはいずれも Haskell で実装されております．拡張パッケージのインストールに `cabal` という Haskell のパッケージ管理システムを用います．`pandoc` と `cabal-install` は Homebrew でインストールし，残りは `cabal` を用います．なお，`cabal` は `$HOME/.cabal/bin` にインストールします．今回は実行スクリプトのなかでこのディレクトリを`PATH`に追加しているので，`PATH`設定は不要ですが，日常的に`pandoc`を使うのであれば`$HOME/.cabal/bin`を`PATH`に追加するとよいでしょう．
 
-        - 拡張ツールのインストール方法
+        Mac では
 
-            pandoc とここで紹介する拡張ツールはいずれも Haskell で実装されております．拡張パッケージのインストールに `cabal` という Haskell のパッケージ管理システムを用います．`pandoc` と `cabal-install` は Homebrew でインストールし，残りは `cabal` を用います．なお，`cabal` は `$HOME/.cabal/bin` にインストールします．今回は実行スクリプトのなかでこのディレクトリを`PATH`に追加しているので，`PATH`設定は不要ですが，日常的に`pandoc`を使うのであれば`$HOME/.cabal/bin`を`PATH`に追加するとよいでしょう．
+        ```
+        brew install pandoc cabal-install
+        cabal update
+        cabal install pandoc-citeproc
+        cabal install pandoc-crossref
+        ```
 
-            ```
-            brew install pandoc cabal-install
-            cabal install pandoc-citeproc
-            cabal install pandoc-crossref
-            ```
+        Bash for Windows on Ubuntu では
 
-    - `Git`: このリポジトリのダウンロードに使えるけれど，なくても大丈夫
+        ```
+        apt-get install pandoc cabal-install
+        cabal update
+        cabal install pandoc-citeproc
+        cabal install pandoc-crossref
+        ```
+
+- `Git`: このリポジトリのダウンロードに使えるけれど，なくても大丈夫
 
 ## 実習
 
