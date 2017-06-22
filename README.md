@@ -39,22 +39,10 @@
         brew install pandoc pandoc-citeproc pandoc-crossref
         ```
 
-        あるいは
-
-        ```
-        brew install pandoc cabal-install
-        cabal update
-        cabal install pandoc-citeproc
-        cabal install pandoc-crossref
-        ```
-
         Bash for Windows on Ubuntu では
 
         ```
-        apt-get install pandoc cabal-install
-        cabal update
-        cabal install pandoc-citeproc
-        cabal install pandoc-crossref
+        現在調査中です．．．
         ```
 
 - `Git`: このリポジトリのダウンロードに使えるけれど，なくても大丈夫
