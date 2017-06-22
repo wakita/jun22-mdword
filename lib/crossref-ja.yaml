@@ -1,3 +1,4 @@
+---
 figureTitle: "図"
 tableTitle: "表"
 figPrefix: "図"
@@ -6,4 +7,4 @@ secPrefix: ""
 tblPrefix: "表"
 loftitle: "# 図の一覧"
 lotTitle: "# 表の一覧"
-toc-title: "目次"
+---

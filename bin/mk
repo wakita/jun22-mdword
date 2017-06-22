@@ -2,49 +2,40 @@
 
 PATH=$HOME/.cabal/bin:$PATH
 step=$1
-step=${step:=v0}
+step=${step:=final}
 
 case $step in
   v0) # いきなりテキストファイルを処理
     parameters=(
-    -f markdown
+    --from markdown
     doc/constitution.txt);;
 
   v1) # Markdown化
     parameters=(
-    -f markdown
+    --from markdown
     doc/constitution.md);;
 
   v2) # 目次の追加
     parameters=(
-    -f markdown+pandoc_title_block
+    --from markdown+pandoc_title_block
     --number-sections
-    --filter=pandoc-crossref
-    --metadata="corssrefYaml:etc/pandoc-crossref-ja.yaml"
-    --table-of-contents
-    doc/constitution.md);;
+    doc/constitution.md
+    --table-of-contents lib/pandoc-ja.yaml);;
     
   # スタイリング
-  v3)
+  v3 | final)
     parameters=(
-    -f markdown+pandoc_title_block
+    --from markdown+pandoc_title_block
     --number-sections
-    --metadata="corssrefYaml:etc/pandoc-empty.yaml"
-    --reference-docx=etc/constitution.docx
-    --table-of-contents
-    doc/constitution.md);;
+    doc/constitution.md
+    --table-of-contents lib/pandoc-ja.yaml
+    --reference-docx=lib/constitution-templ.docx);;
 
-  final) # 完成
-    parameters=(
-    -f markdown+pandoc_title_block
-    --number-sections
-    --filter=pandoc-crossref
-    --metadata="corssrefYaml:etc/pandoc-crossref-ja.yaml"
-    --reference-docx=etc/constitution.docx
-    --table-of-contents
-    doc/constitution.md);;
+  v*)
+    echo "Usage: $0 {v[0123]}"
+    exit 1;;
 esac
 
-cmdline="pandoc -t docx -o constitution-$step.docx --standalone ${parameters[@]}"
+cmdline="pandoc$EXE -t docx -o constitution-$step.docx --standalone ${parameters[@]}"
 echo $cmdline
 $cmdline

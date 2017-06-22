@@ -1,0 +1,2 @@
+- [Variables set by pandoc](http://pandoc.org/MANUAL.html#variables-set-by-pandoc)
+    - ここに `toc-title` について書かれている。
