@@ -49,7 +49,7 @@ Markdown，テキストエディタ
 
 ## 実習
 
-- （著作権の関係から）[日本国憲法のテキスト](http://law.e-gov.go.jp/htmldata/S21/S21KE000.html)を使います．これをそのまま複製して，Markdown化したものが`[`doc/constitution.md`](doc/constitution.md)`です．
+- （著作権の関係から）[日本国憲法のテキスト](http://law.e-gov.go.jp/htmldata/S21/S21KE000.html)を使います．これをそのまま複製して，Markdown化したものが`[doc/constitution.md](doc/constitution.md)`です．
 
 ## 内容
 
