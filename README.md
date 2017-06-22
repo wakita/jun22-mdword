@@ -36,6 +36,12 @@
         Mac では
 
         ```
+        brew install pandoc pandoc-citeproc pandoc-crossref
+        ```
+
+        あるいは
+
+        ```
         brew install pandoc cabal-install
         cabal update
         cabal install pandoc-citeproc
