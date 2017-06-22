@@ -11,12 +11,57 @@
 
 `pandoc` を中心に，メタデータや参照ドキュメント機構とかまで紹介します．標題の指定，目次，図表などの挿入，スタイル設定，時間があったら相互参照，数式の利用，文献リストの生成まで紹介しようと思います．
 
-*使用するソフト*
+Markdown，テキストエディタ
 
-- `pandoc`, `pandoc-citeproc`, `pandoc-crossref`, Microsoft Word, `git`
+## 使用するソフトウェア
 
-```
-brew install pandoc cabal-install
-cabal install pandoc-citeproc
-cabal install pandoc-crossref
-```
+- 必須なソフトウェア
+
+    - テキストエディタ
+
+    - `pandoc`: 汎用Markdownプロセッサ．htmlはもちろん，docx, epub, LaTeX, man, PDF, wiki, 各種Markdown方言，各種スライドショーなどを出力できます．(`brew install pandoc`)
+
+    - Microsoft Word: できあがった Word 文書を閲覧するため．スタイリングにも使います．
+
+- あると便利なソフトウェア
+
+    - Markdown のサポートツール: 手元で編集したMarkdownの様子を眺められるツールがあると嬉しいかも．
+
+    - `sed`: UNIX標準の正規表現の変換ツール
+
+    - `pandoc` 用の拡張ツール
+
+        - `pandoc-crossref`: 相互参照のため図表，数式などに番号づけをする
+
+        - `pandoc-citeproc`: 文献リストを挿入する
+
+        - 拡張ツールのインストール方法
+
+            pandoc とここで紹介する拡張ツールはいずれも Haskell で実装されております．拡張パッケージのインストールに `cabal` という Haskell のパッケージ管理システムを用います．`pandoc` と `cabal-install` は Homebrew でインストールし，残りは `cabal` を用います．なお，`cabal` は `$HOME/.cabal/bin` にインストールします．今回は実行スクリプトのなかでこのディレクトリを`PATH`に追加しているので，`PATH`設定は不要ですが，日常的に`pandoc`を使うのであれば`$HOME/.cabal/bin`を`PATH`に追加するとよいでしょう．
+
+            ```
+            brew install pandoc cabal-install
+            cabal install pandoc-citeproc
+            cabal install pandoc-crossref
+            ```
+
+    - `Git`: このリポジトリのダウンロードに使えるけれど，なくても大丈夫
+
+## 実習
+
+- （著作権の関係から）[日本国憲法のテキスト](http://law.e-gov.go.jp/htmldata/S21/S21KE000.html)を使います．これをそのまま複製して，Markdown化したものが`md/constitution.md`です．
+
+## 内容
+
+`pandoc` を中心に，メタデータや参照ドキュメント機構とかまで紹介します．
+
+- Markdownを用いたdocxの生成
+- 標題
+- 目次
+- 図表などの挿入
+- 日本語化設定
+- スタイル設定
+- 時間があったら
+    - 相互参照
+    - 数式の利用
+    - 文献リストの生成

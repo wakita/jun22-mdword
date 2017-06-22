@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sed -E -f lib/constitution.sed doc/constitution.txt > doc/constitution.md
