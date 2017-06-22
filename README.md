@@ -39,11 +39,11 @@
         brew install pandoc pandoc-citeproc pandoc-crossref
         ```
 
-        Bash for Windows on Ubuntu では
+        Windows では
 
-        ```
-        現在調査中です．．．
-        ```
+        - [Pandoc のインストーラ](https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-1.19.2.1-windows.msi)を使って，pandoc と pandoc-citeproc をインストールし，
+        - [pandoc-crossref のバイナリ](https://github.com/lierdakil/pandoc-crossref/releases/download/v0.2.5.0/windows-ghc8-pandoc1-19.zip) を展開して得られる `pandoc-crossref.exe` を `c:\Program (x86)\Pandoc` に保存して下さい．
+
 
 - `Git`: このリポジトリのダウンロードに使えるけれど，なくても大丈夫
 
