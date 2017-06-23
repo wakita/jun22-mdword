@@ -1,41 +1,48 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+if (type pandoc > /dev/null 2>&1); then pandoc=pandoc
+elif (type pandoc.exe > /dev/null 2>&1); then pandoc=pandoc.exe
+fi
 
 PATH=$HOME/.cabal/bin:$PATH
 step=$1
-step=${step:=final}
+step=${step:=v3}
+
+parameters=(--from markdown)
 
 case $step in
-  v0) # いきなりテキストファイルを処理
-    parameters=(
-    --from markdown
-    doc/constitution.txt);;
-
-  v1) # Markdown化
-    parameters=(
-    --from markdown
-    doc/constitution.md);;
-
-  v2) # 目次の追加
-    parameters=(
-    --from markdown+pandoc_title_block
-    --number-sections
-    doc/constitution.md
-    --table-of-contents lib/pandoc-ja.yaml);;
-    
-  # スタイリング
-  v3 | final)
-    parameters=(
-    --from markdown+pandoc_title_block
-    --number-sections
-    doc/constitution.md
-    --table-of-contents lib/pandoc-ja.yaml
-    --reference-docx=lib/constitution-templ.docx);;
-
-  v*)
-    echo "Usage: $0 {v[0123]}"
-    exit 1;;
+  v[0123]) ;;
+  *)
+    echo "Usage: $0 v[0123]"
+    exit 1
 esac
 
-cmdline="pandoc$EXE -t docx -o constitution-$step.docx --standalone ${parameters[@]}"
+# v0 はテキストをそのまま処理
+# その他の場合は Markdown に変換されたものを処理
+case $step in
+  v0) parameters+=(doc/constitution.txt);;
+  *) parameters+=(doc/constitution.md)
+esac
+
+# v2, v3のときはMarkdownのメタ情報から表題を生成
+case $step in
+  v[23])
+    parameters+=(
+    --from markdown+pandoc_title_block)
+esac
+
+# v1, v2, v3のときは目次を生成
+case $step in
+  v[123])
+    parameters+=(--table-of-contents lib/pandoc-ja.yaml)
+esac
+
+# v3のときはWordスタイルテンプレートを使用
+case $step in
+  v3)
+    parameters+=(--reference-docx=lib/constitution-templ.docx)
+esac
+
+cmdline="$pandoc -t docx -o constitution-$step.docx --standalone ${parameters[@]}"
 echo $cmdline
 $cmdline
