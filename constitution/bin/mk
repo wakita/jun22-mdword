@@ -34,7 +34,7 @@ esac
 # v1, v2, v3のときは目次を生成
 case $step in
   v[123])
-    parameters+=(--table-of-contents lib/pandoc-ja.yaml)
+    parameters+=(--table-of-contents --toc-depth=1 lib/pandoc-ja.yaml)
 esac
 
 # v3のときはWordスタイルテンプレートを使用
